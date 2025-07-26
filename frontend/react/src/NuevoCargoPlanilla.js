@@ -1,40 +1,49 @@
 import React, { useEffect, useState } from 'react';
+import Select from './components/Select';
 
 export default function NuevoCargoPlanilla() {
-  const [model, setModel] = useState({});
+  const [model, setModel] = useState({
+    areas: [],
+    contratos: [],
+    rubros: [],
+    centrosCosto: [],
+    ubicaciones: [],
+    regiones: [],
+    tarifas: [],
+  });
   const [form, setForm] = useState({
-    areaSeleccionada: null,
-    contratoSeleccionado: null,
-    rubroSeleccionado: null,
-    centroCostoSeleccionado: null,
-    ubicacionSeleccionada: null,
-    regionSeleccionada: null,
-    tarifaSeleccionada: null,
+    areaSeleccionada: '',
+    contratoSeleccionado: '',
+    rubroSeleccionado: '',
+    centroCostoSeleccionado: '',
+    ubicacionSeleccionada: '',
+    regionSeleccionada: '',
+    tarifaSeleccionada: '',
+    fechaCargoString: new Date().toISOString().slice(0, 10),
     cantidadUnidad: '',
     cantidadUnidadExtras: '',
-    fechaCargoString: new Date().toISOString().slice(0, 10),
   });
 
   useEffect(() => {
     Promise.all([
+      fetch('/api/areas').then(r => r.json()),
+      fetch('/api/contratos').then(r => r.json()),
+      fetch('/api/rubros').then(r => r.json()),
       fetch('/api/centros-costo').then(r => r.json()),
       fetch('/api/ubicaciones').then(r => r.json()),
-      fetch('/api/areas').then(r => r.json()),
       fetch('/api/regiones').then(r => r.json()),
       fetch('/api/tarifas').then(r => r.json()),
-      fetch('/api/rubros').then(r => r.json()),
-      fetch('/api/contratos').then(r => r.json()),
-    ]).then(([centrosCosto, ubicaciones, areas, regiones, tarifas, rubros, contratos]) => {
-      setModel({ centrosCosto, ubicaciones, areas, regiones, tarifas, rubros, contratos });
+    ]).then(([areas, contratos, rubros, centrosCosto, ubicaciones, regiones, tarifas]) => {
+      setModel({ areas, contratos, rubros, centrosCosto, ubicaciones, regiones, tarifas });
     });
   }, []);
 
-  function handleChange(e) {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  }
-
   function handleSelect(name, value) {
     setForm({ ...form, [name]: value });
+  }
+
+  function handleChange(e) {
+    setForm({ ...form, [e.target.name]: e.target.value });
   }
 
   function handleSubmit(e) {
@@ -53,13 +62,73 @@ export default function NuevoCargoPlanilla() {
       <label>Fecha:
         <input type="date" name="fechaCargoString" value={form.fechaCargoString} onChange={handleChange} />
       </label>
-      <label>Área:
-        <select name="areaSeleccionada" onChange={e => handleSelect('areaSeleccionada', e.target.value)}>
-          <option value="">Seleccione un área</option>
-          {model.areas?.map(a => <option key={a.id} value={a.id}>{a.descripcion}</option>)}
-        </select>
+      <Select
+        label="Área:"
+        name="areaSeleccionada"
+        options={model.areas}
+        value={form.areaSeleccionada}
+        onChange={e => handleSelect('areaSeleccionada', e.target.value)}
+      />
+      <Select
+        label="Empleado:"
+        name="contratoSeleccionado"
+        options={model.contratos}
+        value={form.contratoSeleccionado}
+        onChange={e => handleSelect('contratoSeleccionado', e.target.value)}
+        optionLabel="codigoNombreCompleto"
+        optionValue="id"
+      />
+      <Select
+        label="Rubro:"
+        name="rubroSeleccionado"
+        options={model.rubros}
+        value={form.rubroSeleccionado}
+        onChange={e => handleSelect('rubroSeleccionado', e.target.value)}
+        optionLabel="abreviaturaNombre"
+        optionValue="id"
+      />
+      <Select
+        label="Centro de costo:"
+        name="centroCostoSeleccionado"
+        options={model.centrosCosto}
+        value={form.centroCostoSeleccionado}
+        onChange={e => handleSelect('centroCostoSeleccionado', e.target.value)}
+        optionLabel="abreviaturaCentroCosto"
+        optionValue="id"
+      />
+      <Select
+        label="Ubicación:"
+        name="ubicacionSeleccionada"
+        options={model.ubicaciones}
+        value={form.ubicacionSeleccionada}
+        onChange={e => handleSelect('ubicacionSeleccionada', e.target.value)}
+        optionLabel="abreviaturaUbicacion"
+        optionValue="id"
+      />
+      <Select
+        label="Región:"
+        name="regionSeleccionada"
+        options={model.regiones}
+        value={form.regionSeleccionada}
+        onChange={e => handleSelect('regionSeleccionada', e.target.value)}
+        optionLabel="idAbreviatura"
+        optionValue="id"
+      />
+      <Select
+        label="Tarifa:"
+        name="tarifaSeleccionada"
+        options={model.tarifas}
+        value={form.tarifaSeleccionada}
+        onChange={e => handleSelect('tarifaSeleccionada', e.target.value)}
+        optionLabel="nombre"
+        optionValue="id"
+      />
+      <label>Cantidad unidad:
+        <input type="number" name="cantidadUnidad" value={form.cantidadUnidad} onChange={handleChange} />
       </label>
-      {/* Repite para los demás campos */}
+      <label>Cantidad unidad extraordinario:
+        <input type="number" name="cantidadUnidadExtras" value={form.cantidadUnidadExtras} onChange={handleChange} />
+      </label>
       <button type="submit">Guardar</button>
     </form>
   );
