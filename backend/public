@@ -1,0 +1,15 @@
+/mi-proyecto
+|-- /backend (Symfony 7)
+|   |-- /config
+|   |-- /src
+|   |-- /templates
+|   |-- /var
+|   |-- /vendor
+|   |-- composer.json
+|   |-- ...
+|-- /frontend
+|   |-- /ember
+|   |-- /react
+|   |-- /vue
+|   |-- /inertia
+|   |-- ...
