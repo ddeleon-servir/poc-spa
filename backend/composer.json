@@ -1,2 +1,10 @@
-   composer create-project symfony/skeleton my_project
-   cd my_project
+{
+    "require": {
+        "php": "^8.2",
+        "symfony/framework-bundle": "^7.0",
+        "symfony/serializer": "^7.0",
+        "symfony/asset": "^7.0",
+        "symfony/routing": "^7.0",
+        "skipthedragon/inertia-bundle": "^1.1"
+    }
+}

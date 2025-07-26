@@ -1,0 +1,34 @@
+# Symfony 7 - .gitignore
+
+# Dependencias de Composer
+/vendor/
+
+# Archivos de entorno (no comitear .env.local con credenciales)
+.env.local
+.env.*.local
+.env.test
+.env.test.local
+
+# Archivos de logs y caché
+/var/log/
+/var/cache/
+
+# Archivos de PHPUnit
+/phpunit.xml
+/phpunit.xml.dist
+/.phpunit.result.cache
+
+# Archivos de test coverage
+/coverage/
+
+# IDEs
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos g
