@@ -2,8 +2,10 @@
   "name": "symfony-poc",
   "private": true,
   "scripts": {
-    "dev": "vite",
-    "build": "vite build"
+    "dev:inertia-react": "MODE=inertia-react vite",
+    "build:inertia-react": "MODE=inertia-react vite build",
+    "dev:inertia-vue": "MODE=inertia-vue vite",
+    "build:inertia-vue": "MODE=inertia-vue vite build"
   },
   "dependencies": {
     "@inertiajs/core": "^2.0.17",

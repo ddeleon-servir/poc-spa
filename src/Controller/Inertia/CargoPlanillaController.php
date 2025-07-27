@@ -14,6 +14,11 @@ class CargoPlanillaController extends AbstractController
     {
     }
 
+    #[Route('/inertia-react-test', name: 'app_inertia_react_test')]
+    public function inertiaReactTest(): Response {
+        return $this->inertia->render('Test');
+    }
+
     #[Route('/inertia-react', name: 'app_inertia_react')]
     public function inertiaReact(): Response {
         return $this->inertia->render('Inicio');

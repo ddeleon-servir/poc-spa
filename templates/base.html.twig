@@ -1,13 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
   <head>
+    <meta charset="UTF-8">
     <title>{% block title %}Inertia{% endblock %}</title>
+
     {% if page is defined %}
-        {{ inertiaHead(page) }}
+      {{ inertiaHead(page) }}
     {% endif %}
-    {{ vite_entry_link_tags(app.request.attributes.get('_route') == 'app_inertia_react' ? 'inertiaReact' : 'inertiaVue') }}
+
+    {{ vite_entry_link_tags('inertiaReact') }}
   </head>
   <body>
-    {{ vite_entry_script_tags(app.request.attributes.get('_route') == 'app_inertia_react' ? 'inertiaReact' : 'inertiaVue') }}
+    {% block body %}
+      <div id="app" data-page="{{ page|json_encode }}"></div>
+    {% endblock %}
+
+    {{ vite_entry_script_tags('inertiaReact') }}
   </body>
 </html>
