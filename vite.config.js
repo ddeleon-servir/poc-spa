@@ -3,13 +3,13 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 
 export default defineConfig({
-    plugins: [react()], // Enables React/JSX support
+    plugins: [react()],
     root: './assets',
     build: {
         outDir: '../public/build',
         manifest: true,
         rollupOptions: {
-            input: './js/app.js', // Relative path to app.js
+            input: './js/app.js', // Ensure correct path
         },
     },
     server: {
@@ -21,9 +21,8 @@ export default defineConfig({
             usePolling: true,
         },
         proxy: {
-            // Proxy non-asset requests to Apache2
             '^/(?!(@vite|@fs|js/|node_modules/)).*': {
-                target: 'http://poc-spa.local', // Apache2 virtual host
+                target: 'http://spa.local', // Apache2 virtual host
                 changeOrigin: true,
             },
         },
