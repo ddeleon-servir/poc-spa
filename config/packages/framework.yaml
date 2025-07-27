@@ -5,6 +5,11 @@ framework:
     # Note that the session will be started ONLY if you read or write from it.
     session: true
 
+    # router:
+    #     resource: '%kernel.project_dir%/config/routes.yaml'
+    # # middleware:
+        # - App\Middleware\InertiaMiddleware
+
     #esi: true
     #fragments: true
 

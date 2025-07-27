@@ -1,13 +1,21 @@
-
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Mi SPA</title>
-    {{ vite_entry_link_tags('main.jsx') }}
-  </head>
-  <body>
-    {{ inertia(page) }}
-    {{ vite_entry_script_tags('main.jsx') }}
-  </body>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Symfony SPA</title>
+    {% if app.environment == 'dev' %}
+        <script type="module" src="http://localhost:5173/@vite/client"></script>
+        <script type="module" src="http://localhost:5173/js/app.js"></script>
+    {% else %}
+        {% set manifest = asset('build/manifest.json')|json_decode %}
+        {% if manifest['js/app.js'].css is defined %}
+            <link rel="stylesheet" href="{{ asset(manifest['js/app.js'].css[0]) }}">
+        {% endif %}
+        <script type="module" src="{{ asset(manifest['js/app.js'].file) }}"></script>
+    {% endif %}
+</head>
+<body>
+    <div id="app" data-page="{{ page|json_encode|e('html_attr') }}"></div>
+</body>
 </html>
