@@ -1,10 +1,45 @@
-
-###> symfony/framework-bundle ###
+### Symfony ###
+/var/
+/vendor/
 /.env.local
 /.env.local.php
 /.env.*.local
-/config/secrets/prod/prod.decrypt.private.php
 /public/bundles/
-/var/
-/vendor/
-###< symfony/framework-bundle ###
+/node_modules/
+!/assets/
+/public/build/
+/public/hot
+/public/react-refresh.js
+
+### Vite ###
+/dist/
+/.vite/
+.vitepress/
+
+### Yarn ###
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.yarnrc.yml
+.pnp.*
+.cache/
+
+### npm ###
+package-lock.json
+npm-debug.log*
+
+### Logs ###
+*.log
+*.log.*
+/logs
+
+### IDEs ###
+.idea/
+.vscode/
+*.swp
+
+### Misc ###
+.DS_Store
+Thumbs.db
