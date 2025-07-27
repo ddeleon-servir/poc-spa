@@ -2,11 +2,12 @@
 <html>
   <head>
     <title>{% block title %}Inertia{% endblock %}</title>
-    {{ inertia_head() }}
+    {% if page is defined %}
+        {{ inertiaHead(page) }}
+    {% endif %}
     {{ vite_entry_link_tags(app.request.attributes.get('_route') == 'app_inertia_react' ? 'inertiaReact' : 'inertiaVue') }}
   </head>
   <body>
-    @inertia
     {{ vite_entry_script_tags(app.request.attributes.get('_route') == 'app_inertia_react' ? 'inertiaReact' : 'inertiaVue') }}
   </body>
 </html>

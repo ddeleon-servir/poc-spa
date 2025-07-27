@@ -7,6 +7,7 @@
         "php": ">=8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "pentatrion/vite-bundle": "^8.2",
         "skipthedragon/inertia-bundle": "^1.1",
         "symfony/console": "7.3.*",
         "symfony/dotenv": "7.3.*",
