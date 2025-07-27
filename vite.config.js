@@ -4,47 +4,15 @@ import react from '@vitejs/plugin-react';
 import symfonyPlugin from 'vite-plugin-symfony';
 
 export default defineConfig({
-  plugins: [
-    react(),
-    symfonyPlugin({
-      viteDevServerHostname: 'localhost',
-      viteDevServerPort: 5173,
-    }),
-  ],
+  plugins: [react(), symfonyPlugin()],
   build: {
-    rollupOptions: {
-      input: {
-        inertiaReact: 'assets/inertia-react/app.jsx',
-      },
-    },
-  },
-  resolve: {
-    alias: {
-      '@pages': '/assets/inertia-react/Pages',
-    },
+    outDir: '../public/build',
+    emptyOutDir: true,
   },
   server: {
+    origin: 'http://localhost:5173',
     port: 5173,
     strictPort: true,
-    origin: 'http://localhost:5173',
-    cors: true,
-    hmr: {
-      host: 'localhost',
-    },
+    cors: true
   },
-  optimizeDeps: {
-    include: [
-      '@inertiajs/inertia',
-      '@inertiajs/inertia-react',
-      'react',
-      'react-dom',
-    ],
-    esbuildOptions: {
-      jsx: 'automatic',
-    },
-  },
-  esbuild: {
-    loader: 'jsx',
-    include: /\.jsx?$/,
-  },
-});
+})

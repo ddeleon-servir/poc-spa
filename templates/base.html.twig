@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Inertia{% endblock %}</title>
-    {% if page is defined %}
-      {{ inertiaHead(page) }}
-    {% endif %}
-    {{ vite_entry_link_tags('inertiaReact') }}
-  </head>
-  <body>
-    {% block body %}
-      <div id="app" data-page="{{ page|json_encode|e('html_attr') }}"></div>
-      <!-- Debug JSON -->
-      <pre>Debug JSON: {{ page|json_encode|raw }}</pre>
+<html class="h-full bg-gray-100">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block stylesheets %}
+        {{ vite_entry_link_tags('main') }}
     {% endblock %}
-    {{ vite_entry_script_tags('inertiaReact') }}
-  </body>
+
+    {# Inertia #}
+    <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=smoothscroll,NodeList.prototype.forEach,Promise,Object.values,Object.assign" defer></script>
+
+    {% block javascripts %}
+        {{ vite_entry_script_tags('main') }}
+    {% endblock %}
+</head>
+<body class="font-sans leading-none text-gray-700 antialiased">
+    {{ inertia(page) }}
+</body>
 </html>
