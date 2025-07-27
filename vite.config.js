@@ -13,8 +13,8 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        react: 'assets/react/app.jsx',
         inertiaReact: 'assets/inertia-react/app.jsx',
+        react: 'assets/react/app.jsx',
         vue: 'assets/vue/app.js',
         inertiaVue: 'assets/inertia-vue/app.js',
       },
@@ -23,5 +23,10 @@ export default defineConfig({
   server: {
     port: 5173,
     strictPort: true,
+    origin: 'http://localhost:5173',
+    cors: true,
+    hmr: {
+      host: 'localhost',
+    },
   },
 });

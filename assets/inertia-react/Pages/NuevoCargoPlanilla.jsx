@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useForm } from '@inertiajs/react';
+import { useForm } from '@inertiajs/inertia-react';
 import Select from '../components/Select';
 
 export default function NuevoCargoPlanilla({
