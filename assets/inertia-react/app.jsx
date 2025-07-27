@@ -1,3 +1,5 @@
+// assets/inertia-react/app.jsx
+import React from 'react'; // Forzar detección
 import { createInertiaApp } from '@inertiajs/inertia-react';
 import { createRoot } from 'react-dom/client';
 

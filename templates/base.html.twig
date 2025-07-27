@@ -3,18 +3,17 @@
   <head>
     <meta charset="UTF-8">
     <title>{% block title %}Inertia{% endblock %}</title>
-
     {% if page is defined %}
       {{ inertiaHead(page) }}
     {% endif %}
-
     {{ vite_entry_link_tags('inertiaReact') }}
   </head>
   <body>
     {% block body %}
-      <div id="app" data-page="{{ page|json_encode }}"></div>
+      <div id="app" data-page="{{ page|json_encode|e('html_attr') }}"></div>
+      <!-- Debug JSON -->
+      <pre>Debug JSON: {{ page|json_encode|raw }}</pre>
     {% endblock %}
-
     {{ vite_entry_script_tags('inertiaReact') }}
   </body>
 </html>

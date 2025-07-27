@@ -1,30 +1,28 @@
 // vite.config.js
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import vue from '@vitejs/plugin-vue';
 import symfonyPlugin from 'vite-plugin-symfony';
 
-const mode = process.env.MODE;
+const mode = process.env.MODE || 'inertia-react'; // Fallback to inertia-react
 
 export default defineConfig({
   plugins: [
-    mode === 'inertia-react' ? react() : null,
-    // mode === 'inertia-vue' ? vue() : null,
-    symfonyPlugin(),
+    // mode === 'inertia-react' ? react() : null,
+    react(),
+    symfonyPlugin({
+      viteDevServerHostname: 'localhost',
+      viteDevServerPort: 5173,
+    }),
   ].filter(Boolean),
   build: {
     rollupOptions: {
       input: {
         inertiaReact: 'assets/inertia-react/app.jsx',
-        // react: 'assets/react/app.jsx',
-        // vue: 'assets/vue/app.js',
-        // inertiaVue: 'assets/inertia-vue/app.js',
       },
     },
   },
   resolve: {
     alias: {
-      // Ensure Vite resolves ./Pages correctly
       './Pages': '/assets/inertia-react/Pages',
     },
   },
@@ -36,5 +34,15 @@ export default defineConfig({
     hmr: {
       host: 'localhost',
     },
+  },
+  optimizeDeps: {
+    include: ['@inertiajs/inertia-react', 'react', 'react-dom'],
+    esbuildOptions: {
+      jsx: 'automatic', // Ensure JSX transformation
+    },
+  },
+  esbuild: {
+    loader: 'jsx',
+    include: /src\/.*\.jsx?$/, // ajusta si tu ruta es distinta
   },
 });
