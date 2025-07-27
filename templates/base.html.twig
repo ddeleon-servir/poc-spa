@@ -4,16 +4,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Symfony SPA</title>
-    {% if app.environment == 'dev' %}
-        <script type="module" src="http://localhost:5173/@vite/client"></script>
-        <script type="module" src="http://localhost:5173/js/app.js"></script>
-    {% else %}
-        {% set manifest = asset('build/manifest.json')|json_decode %}
-        {% if manifest['js/app.js'].css is defined %}
-            <link rel="stylesheet" href="{{ asset(manifest['js/app.js'].css[0]) }}">
+    {% block stylesheets %}
+        {% if app.environment == 'dev' %}
+            <script type="module" src="http://localhost:5173/@vite/client"></script>
+            <script type="module" src="http://localhost:5173/js/app.js"></script>
+        {% else %}
+            {% set manifest = asset('build/manifest.json')|json_encode %}
+            {% if manifest['js/app.js'].css is defined %}
+                <link rel="stylesheet" href="{{ asset(manifest['js/app.js'].css[0]) }}">
+            {% endif %}
+            <script type="module" src="{{ asset(manifest['js/app.js'].file) }}"></script>
         {% endif %}
-        <script type="module" src="{{ asset(manifest['js/app.js'].file) }}"></script>
-    {% endif %}
+    {% endblock %}
 </head>
 <body>
     <div id="app" data-page="{{ page|json_encode|e('html_attr') }}"></div>

@@ -17,18 +17,17 @@ export default defineConfig({
             usePolling: true,
         },
         proxy: {
-            // Proxy all non-Vite requests to Apache2
             '/': {
-                target: 'http://localhost', // Apache2 on port 80
+                target: 'http://spa.local',
                 changeOrigin: true,
                 bypass: (req) => {
-                    // Skip proxy for Vite-specific assets
                     if (req.url.startsWith('/@vite') || req.url.endsWith('.js')) {
                         return req.url;
                     }
                 },
             },
         },
+        cors: true
     },
     resolve: {
         alias: {
