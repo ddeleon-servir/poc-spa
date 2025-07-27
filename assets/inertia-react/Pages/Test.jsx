@@ -1,4 +1,3 @@
-// assets/inertia-react/Pages/Test.jsx
-export default function Test(props) {
-  return <div>Test Page</div>;
+export default function Test({ testProp }) {
+  return <div>Hello from Test! Prop: {testProp}</div>;
 }

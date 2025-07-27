@@ -3,17 +3,14 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import symfonyPlugin from 'vite-plugin-symfony';
 
-const mode = process.env.MODE || 'inertia-react'; // Fallback to inertia-react
-
 export default defineConfig({
   plugins: [
-    // mode === 'inertia-react' ? react() : null,
     react(),
     symfonyPlugin({
       viteDevServerHostname: 'localhost',
       viteDevServerPort: 5173,
     }),
-  ].filter(Boolean),
+  ],
   build: {
     rollupOptions: {
       input: {
@@ -23,7 +20,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      './Pages': '/assets/inertia-react/Pages',
+      '@pages': '/assets/inertia-react/Pages',
     },
   },
   server: {
@@ -36,13 +33,18 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    include: ['@inertiajs/inertia-react', 'react', 'react-dom'],
+    include: [
+      '@inertiajs/inertia',
+      '@inertiajs/inertia-react',
+      'react',
+      'react-dom',
+    ],
     esbuildOptions: {
-      jsx: 'automatic', // Ensure JSX transformation
+      jsx: 'automatic',
     },
   },
   esbuild: {
     loader: 'jsx',
-    include: /src\/.*\.jsx?$/, // ajusta si tu ruta es distinta
+    include: /\.jsx?$/,
   },
 });

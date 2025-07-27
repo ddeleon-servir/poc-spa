@@ -6,7 +6,7 @@ import { createRoot } from 'react-dom/client';
 createInertiaApp({
   resolve: name => {
     console.log(`Loading page: ./Pages/${name}.jsx`);
-    return import(`./Pages/${name}.jsx`).then(module => {
+    return import(`@pages/${name}.jsx`).then(module => {
       if (!module.default) {
         throw new Error(`Page ${name} does not have a default export`);
       }
