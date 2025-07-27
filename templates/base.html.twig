@@ -1,20 +1,13 @@
+
 <!DOCTYPE html>
-<html class="h-full bg-gray-100">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% block stylesheets %}
-        {{ vite_entry_link_tags('main') }}
-    {% endblock %}
-
-    {# Inertia #}
-    <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=smoothscroll,NodeList.prototype.forEach,Promise,Object.values,Object.assign" defer></script>
-
-    {% block javascripts %}
-        {{ vite_entry_script_tags('main') }}
-    {% endblock %}
-</head>
-<body class="font-sans leading-none text-gray-700 antialiased">
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Mi SPA</title>
+    {{ vite_entry_link_tags('main.jsx') }}
+  </head>
+  <body>
     {{ inertia(page) }}
-</body>
+    {{ vite_entry_script_tags('main.jsx') }}
+  </body>
 </html>

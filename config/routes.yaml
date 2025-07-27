@@ -1,9 +1,9 @@
-api:
-    prefix: /api
-    resource: '../src/Controller/Api/'
-    type: attribute
+# api:
+#     prefix: /api
+#     resource: '../src/Controller/Api/'
+#     type: attribute
 
 inertia:
     prefix: /
-    resource: '../src/Controller/Inertia/'
+    resource: '../src/Controller/'
     type: attribute
