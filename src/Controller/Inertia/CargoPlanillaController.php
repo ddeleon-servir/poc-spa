@@ -14,6 +14,11 @@ class CargoPlanillaController extends AbstractController
     {
     }
 
+    #[Route('/inertia-react', name: 'app_inertia_react')]
+    public function inertiaReact(): Response {
+        return $this->inertia->render('InertiaReact/Hello', ['message' => 'Hola desde Inertia React']);
+    }
+
     #[Route('/cargo-planilla/{id?}', name: 'inertia_cargo_planilla')]
     public function index(?int $id = null): Response
     {
